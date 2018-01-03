@@ -25,9 +25,7 @@ class AnomalyDetection:
         窗口内的概率密度曲线权重取直线权重：
         如size为100，则权重为sum(np.linspace(0,0.02,100))
 
-
         阈值，如何设定阈值？如0.01，是概率还是似然值？
-
         '''
 
         # calculate the anomaly score(likelihood)
@@ -92,6 +90,19 @@ class AnomalyDetection:
 
     def __mul__(self, other):
         print('mul')
+
+    def detect3(self):
+        '''
+        ultilize the average line to estimate the anomaly score
+        :return:
+        '''
+
+
+
+
+
+        pass
+
 
 
 if __name__ == '__main__':

@@ -95,4 +95,4 @@ def f5():
     plt.show()
 
 
-f5()
+f1()
