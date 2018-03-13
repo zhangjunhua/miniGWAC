@@ -6,7 +6,7 @@ import json
 import io
 import http.cookiejar
 import gzip
-import xlwt
+# import xlwt
 
 '''
 (id,2368)
