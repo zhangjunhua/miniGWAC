@@ -97,7 +97,7 @@ class AnalysisTool:
                 y[i]=0
         return y
 
-    def estimate_probability_densecurve_norm(self, start=0, end=10, size=100):
+    def estimate_probability_densecurve_norm(self, start=0, end=10, size=1000):
         '''
         正太分布来进行概率密度曲线估计
         '''
@@ -113,6 +113,7 @@ class AnalysisTool:
         for i in range(0, len(data)):
             variance += (data[i][1] - avg) ** 2 / len(data)
 
+        variance=0.05
         # Generate Dense Curve
         x = np.linspace(start, end, size)
         y = np.linspace(0, 0, size)

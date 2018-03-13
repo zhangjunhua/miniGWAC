@@ -11,7 +11,7 @@ class AnomalyDetection:
         self.window_weight = np.linspace(0, 2 / self.window_size, self.window_size)
         self.stream_data = []
         self.anomaly = []
-        self.threshold = 0.00000000001
+        self.threshold = 0.0001
         self.sum_square = 0
         self.avg = 0
 
@@ -28,6 +28,7 @@ class AnomalyDetection:
         阈值，如何设定阈值？如0.01，是概率还是似然值？
         '''
 
+        self.variance=0.01
         # calculate the anomaly score(likelihood)
         likelihood = 0
         if len(self.stream_data) >= self.window_size:
@@ -99,19 +100,15 @@ class AnomalyDetection:
 
 
 
-
-
         pass
 
-
-
-if __name__ == '__main__':
+def exp1():
     detector = AnomalyDetection()
     Experiments.tool.prepare_data(Experiments.file13_1678)
     x, y = Experiments.tool.show_diagram()
     anomaly = [False for row in x]
     for i, time, value in zip(range(len(x)), x, y):
-        anomaly[i] = detector.detect2(time, value)
+        anomaly[i] = detector.detect(time, value)
     print(anomaly)
 
     x_n = []
@@ -129,3 +126,31 @@ if __name__ == '__main__':
     plt.plot(x_ab, y_ab, 'ro')
     plt.plot(x_n, y_n, 'go')
     plt.show()
+
+
+def exp2():
+    import os
+    for path, dirs, files in os.walk(folder):
+        print("path:" + os.path.split(path)[-1])
+        print("dirs:" + str(dirs))
+        print("files:" + str(files))
+        print()
+        for file in files:
+            print(os.path.join(path,file))
+    pass
+
+
+if __name__ == '__main__':
+
+    exp2()
+
+
+
+
+
+
+
+
+
+
+

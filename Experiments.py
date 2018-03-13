@@ -24,14 +24,14 @@ params = {
     # 'end': 10,
     'start': 0,
     'end': 10,
-    'size': 100,
+    'size': 1000,
     'multiply': 1,
     'acc_hstgm': 1,
     'acc_dnscrv': 0.1,
     'filename': file13_1678,
     'amplify_fact': 1.5,
     'dnscrv_version': 1,
-    'dnscrv_func': tool.estimate_probability_densecurve_knn,
+    'dnscrv_func': tool.estimate_probability_densecurve_norm,
     'avg_size': 10,
 }
 
@@ -170,11 +170,12 @@ def draw_diff3():
 
 
 def draw_dense_curve():
-    x, y = params['dnscrv_func'](start=params['start'], end=params['end'], size=params['size'])
+    # x, y = params['dnscrv_func'](start=params['start'], end=params['end'], size=params['size'])
+    x, y = params['dnscrv_func'](start=params['start'], end=params['end'], size=10000)
     params['acc_dnscrv'] = sum(y)
     params['multiply'] = params['acc_hstgm'] / params['acc_dnscrv']
     print(params['multiply'])
-    y *= params['multiply']
+    y *= params['multiply']*10
     # y*=8
     plt.plot(x, y, "r-", linewidth=1)
 
@@ -238,6 +239,13 @@ def exp3():
 
     plt.show()
 
+def loadSimulateGWAC():
+    path=u'E:/working_folder/gwac/0.068_0.030_0.200_0.320_1.280_0.000.dat'
+    time, mag, a, b, c =np.loadtxt(path,unpack='true')
+    plt.plot(time,mag)
+    plt.title(path)
+    plt.show()
 
 if __name__ == '__main__':
-    exp3()
+    # exp1()
+    loadSimulateGWAC()

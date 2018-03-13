@@ -445,3 +445,50 @@ for i in range(1, a + 1):
                     m.append((i, j))
 print m
 print "Loose" if (a, b) in m else "Win"
+
+
+n=2
+n=n-1
+a=[[1]]
+for i in range(n):
+    a.append([1])
+    for j in range(i):
+        a[i+1].append(a[i][j]+a[i][j+1])
+    a[i+1].append(1)
+for b in a:
+    print " ".join(map(lambda x:str(x),b))
+
+
+
+w=[2,5,11]
+n=9
+weights=[0]
+for i in range(1,n+1):
+    if i in w:
+        weights.append(1)
+    else:
+        weightable=False
+        for we in w:
+            if i-we>0 and weights[i-we]==1:
+                weightable=True
+        if weightable:
+            weights.append(1)
+        else:
+            weights.append(0)
+if weights[n]==1:
+    print "Yes"
+else:
+    print "No"
+
+
+
+
+
+
+
+
+
+
+
+
+
