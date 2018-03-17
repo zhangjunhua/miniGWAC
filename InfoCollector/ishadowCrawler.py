@@ -8,8 +8,14 @@ import io
 import http.cookiejar
 import gzip
 
-html = urllib.request.urlopen("https://global.ishadowx.net")
-content = html.read().decode('utf-8')
+url="https://en.ishadowx.net/"
+with_proxy=True
+if with_proxy:
+    proxy=urllib.request.ProxyHandler({'http': '127.0.0.1:1080','https': '127.0.0.1:1080'})
+    opener=urllib.request.build_opener(proxy)
+    opener.addheaders=[('User-Agent','Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36')]
+    urllib.request.install_opener(opener)
+content=urllib.request.urlopen(url).read().decode('utf-8')
 
 # with open('content.pkl','wb') as f:
 #     pickle.dump(content,f)
@@ -36,14 +42,17 @@ for ssitem in allssitems:
     # print("%s %s %s %s"%(ip,port,pwd,method))
     ss={}
     ss['server']=ip
-    ss['server_port']=int(port)
+    if len(port.strip())>0:
+        ss['server_port']=int(port)
+    else:
+        continue
     ss['password'] = pwd
     ss['method'] = method
     ss['remarks'] = ""
     ss['timeout'] = 5
     newss.append(ss)
 
-
+print("%d new ss are crawled from this website."%(len(newss)))
 #del duplicate server in oldss
 for i in range(len(oldss)-1,-1,-1):
     for j in range(len(newss)):
